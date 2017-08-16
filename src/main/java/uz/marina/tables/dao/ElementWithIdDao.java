@@ -6,10 +6,9 @@ import uz.marina.tables.model.ElementWithId;
 import java.util.List;
 
 /**
- * Created by Vladimir on 14.08.2017.
+ * Created by Marina on 15.08.2017.
  */
 public interface ElementWithIdDao extends ElementDao  {
-    Element getElementById(int id);
-    List<ElementWithId> listElementsById(int id);
-    void removeElementById(int id);
+    Element getElementById(Class<? extends Element> elementClass, int id);
+    void removeElementById(Class<? extends Element> elementClass, int id);
 }

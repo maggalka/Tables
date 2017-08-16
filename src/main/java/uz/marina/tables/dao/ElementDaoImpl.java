@@ -12,14 +12,14 @@ import org.hibernate.Query;
 import java.util.List;
 
 /**
- * Created by Vladimir on 06.03.2017.
+ * Created by Marina on 16.08.2017.
  */
 
 @Repository
 public class ElementDaoImpl implements ElementDao {
     private static final Logger logger = LoggerFactory.logger(ElementDaoImpl.class);
 
-    private SessionFactory sessionFactory;
+    protected SessionFactory sessionFactory;
     private static final int limitResultsPerPage = 10;
 
     public void setSessionFactory(SessionFactory sessionFactory){
@@ -41,17 +41,38 @@ public class ElementDaoImpl implements ElementDao {
     }
 
     @Override
-    public List<Element> listElementsByColumnValue(String columnName, int value) {
-        return null;
+    public List<Element> listElementsByColumnValue(Class<? extends Element> elementClass, String columnName, int value) {
+        Session session = this.sessionFactory.getCurrentSession();
+        String tableName = elementClass.getSimpleName().toLowerCase();
+        Query query = session.createQuery("from "+tableName+" where "+tableName+"."+columnName+" = :value");
+        query.setParameter("value",value);
+        List<Element> elementList = query.list();
+        for (Element element : elementList)
+            logger.info(element.getClass().getSimpleName()+"search list:"+element);
+        return elementList;
     }
 
     @Override
-    public void removeElementsByColumnValue(String columnName, int value) {
-
+    public void removeElementsByColumnValue(Class<? extends Element> elementClass, String columnName, int value) {
+        Session session = this.sessionFactory.getCurrentSession();
+        String tableName = elementClass.getSimpleName().toLowerCase();
+        Query query = session.createQuery("delete from "+tableName+" where "+tableName+"."+columnName+" = :value");
+        query.setParameter("value",value);
+        int rowsDeleted = query.executeUpdate();
+        logger.info("Deleted "+rowsDeleted+" rows from "+tableName+" with "+columnName+"="+value);
     }
 
     @Override
-    public List<Element> listElements(Long page) {
-        return null;
+    @SuppressWarnings("unchecked")
+    public List<Element> listElements(String className, Long page) {
+        Session session = this.sessionFactory.getCurrentSession();
+        String tableName = className.toLowerCase();
+        Query query = session.createQuery("from "+tableName);
+        query.setFirstResult((int)(page-1)*limitResultsPerPage);
+        query.setMaxResults(limitResultsPerPage);
+        List<Element> elementList = query.list();
+        for (Element element : elementList)
+            logger.info(element.getClass().getSimpleName()+"search list:"+element);
+        return elementList;
     }
 }
