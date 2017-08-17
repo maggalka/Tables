@@ -1,6 +1,7 @@
 package uz.marina.tables.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uz.marina.tables.dao.ElementWithIdDao;
 import uz.marina.tables.model.Element;
@@ -9,11 +10,15 @@ import uz.marina.tables.model.Element;
  * Created by Marina on 16.08.2017.
  */
 
+@Service
 @Transactional(readOnly = true)
 public class ElementWithIdServiceImpl implements ElementWithIdService{
 
-    @Autowired
     private ElementWithIdDao elementWithIdDao;
+
+    public void setElementWithIdDao(ElementWithIdDao elementWithIdDao) {
+        this.elementWithIdDao = elementWithIdDao;
+    }
 
     @Override
     public Element getElementById(Class<? extends Element> elementClass, int id) {

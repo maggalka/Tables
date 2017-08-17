@@ -18,7 +18,7 @@
           destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url"
-                  value="jdbc:mysql://localhost:3306/test"/>
+                  value="jdbc:mysql://localhost:3306/database"/>
         <property name="username" value="root"/>
         <property name="password" value="Mysql"/>
     </bean>
@@ -30,6 +30,12 @@
         <property name="annotatedClasses">
             <list>
                 <value>uz.marina.tables.model.User</value>
+                <value>uz.marina.tables.model.Otypes</value>
+                <value>uz.marina.tables.model.Objects</value>
+                <value>uz.marina.tables.model.Attributes</value>
+                <value>uz.marina.tables.model.Affiliation</value>
+                <value>uz.marina.tables.model.Records</value>
+                <value>uz.marina.tables.model.Relations</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -41,14 +47,34 @@
         </property>
     </bean>
 
-    <!-- UserDao and UserService beans -->
+    <!-- Dao beans -->
     <bean id="userDao" class="uz.marina.tables.dao.UserDaoImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="elementDao" class="uz.marina.tables.dao.ElementDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="elementWithIdDao" class="uz.marina.tables.dao.ElementWithIdDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <!-- Service beans -->
+
+    <bean id="elementService" class="uz.marina.tables.service.ElementServiceImpl">
+        <property name="elementDao" ref="elementDao"/>
+    </bean>
+
+    <bean id="elementWithIdService" class="uz.marina.tables.service.ElementWithIdServiceImpl">
+        <property name="elementWithIdDao" ref="elementWithIdDao"/>
     </bean>
 
     <bean id="userService" class="uz.marina.tables.service.UserServiceImpl">
         <property name="userDao" ref="userDao"/>
     </bean>
+
+
 
     <context:component-scan base-package="uz.marina.tables"/>
 

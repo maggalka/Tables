@@ -6,7 +6,6 @@ import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.jboss.logging.Logger;
 import org.springframework.stereotype.Repository;
 import uz.marina.tables.model.Element;
-import uz.marina.tables.model.User;
 
 import org.hibernate.Query;
 import java.util.List;

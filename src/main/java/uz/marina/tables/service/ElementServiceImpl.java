@@ -1,6 +1,8 @@
 package uz.marina.tables.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uz.marina.tables.dao.ElementDao;
 import uz.marina.tables.model.Element;
@@ -10,11 +12,16 @@ import java.util.List;
 /**
  * Created by Marina on 16.08.2017.
  */
+
+@Service
 @Transactional(readOnly = true)
 public class ElementServiceImpl implements ElementService {
 
-    @Autowired
     private ElementDao elementDao;
+
+    public void setElementDao(ElementDao elementDao) {
+        this.elementDao = elementDao;
+    }
 
     @Override
     @Transactional
