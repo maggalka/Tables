@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 @Repository
-public class ElementDaoImpl implements ElementDao {
+public class ElementDaoImpl<T extends Element> implements ElementDao {
     private static final Logger logger = LoggerFactory.logger(ElementDaoImpl.class);
 
     protected SessionFactory sessionFactory;
@@ -40,21 +40,21 @@ public class ElementDaoImpl implements ElementDao {
     }
 
     @Override
-    public List<Element> listElementsByColumnValue(Class<? extends Element> elementClass, String columnName, int value) {
+    public List<T> listElementsByColumnValue(String className, String columnName, int value) {
         Session session = this.sessionFactory.getCurrentSession();
-        String tableName = elementClass.getSimpleName().toLowerCase();
+        String tableName = className.toLowerCase();
         Query query = session.createQuery("from "+tableName+" where "+tableName+"."+columnName+" = :value");
         query.setParameter("value",value);
-        List<Element> elementList = query.list();
-        for (Element element : elementList)
+        List<T> elementList = query.list();
+        for (T element : elementList)
             logger.info(element.getClass().getSimpleName()+"search list:"+element);
         return elementList;
     }
 
     @Override
-    public void removeElementsByColumnValue(Class<? extends Element> elementClass, String columnName, int value) {
+    public void removeElementsByColumnValue(String className, String columnName, int value) {
         Session session = this.sessionFactory.getCurrentSession();
-        String tableName = elementClass.getSimpleName().toLowerCase();
+        String tableName = className.toLowerCase();
         Query query = session.createQuery("delete from "+tableName+" where "+tableName+"."+columnName+" = :value");
         query.setParameter("value",value);
         int rowsDeleted = query.executeUpdate();
@@ -63,15 +63,17 @@ public class ElementDaoImpl implements ElementDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Element> listElements(String className, Long page) {
+    public List<T> listElements(String className, Long page) {
         Session session = this.sessionFactory.getCurrentSession();
         String tableName = className.toLowerCase();
         Query query = session.createQuery("from "+tableName);
         query.setFirstResult((int)(page-1)*limitResultsPerPage);
         query.setMaxResults(limitResultsPerPage);
-        List<Element> elementList = query.list();
-        for (Element element : elementList)
+        List<T> elementList = query.list();
+        for (T element : elementList)
             logger.info(element.getClass().getSimpleName()+"search list:"+element);
         return elementList;
+
+
     }
 }
