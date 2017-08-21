@@ -29,7 +29,6 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="annotatedClasses">
             <list>
-                <value>uz.marina.tables.model.User</value>
                 <value>uz.marina.tables.model.Otypes</value>
                 <value>uz.marina.tables.model.Objects</value>
                 <value>uz.marina.tables.model.Attributes</value>
@@ -48,9 +47,6 @@
     </bean>
 
     <!-- Dao beans -->
-    <bean id="userDao" class="uz.marina.tables.dao.UserDaoImpl">
-        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </bean>
 
     <bean id="elementDao" class="uz.marina.tables.dao.ElementDaoImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
@@ -69,12 +65,6 @@
     <bean id="elementWithIdService" class="uz.marina.tables.service.ElementWithIdServiceImpl">
         <property name="elementWithIdDao" ref="elementWithIdDao"/>
     </bean>
-
-    <bean id="userService" class="uz.marina.tables.service.UserServiceImpl">
-        <property name="userDao" ref="userDao"/>
-    </bean>
-
-
 
     <context:component-scan base-package="uz.marina.tables"/>
 
