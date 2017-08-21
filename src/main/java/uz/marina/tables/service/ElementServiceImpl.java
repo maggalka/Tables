@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-public class ElementServiceImpl implements ElementService {
+public class ElementServiceImpl<T extends Element> implements ElementService {
 
     private ElementDao elementDao;
 
@@ -34,18 +34,18 @@ public class ElementServiceImpl implements ElementService {
     }
 
     @Override
-    public List<Element> listElementsByColumnValue(Class<? extends Element> elementClass, String columnName, int value) {
-        return elementDao.listElementsByColumnValue(elementClass,columnName,value);
+    public List<T> listElementsByColumnValue(String className, String columnName, int value) {
+        return elementDao.listElementsByColumnValue(className,columnName,value);
     }
 
     @Override
     @Transactional
-    public void removeElementsByColumnValue(Class<? extends Element> elementClass, String columnName, int value) {
-        elementDao.removeElementsByColumnValue(elementClass,columnName,value);
+    public void removeElementsByColumnValue(String className, String columnName, int value) {
+        elementDao.removeElementsByColumnValue(className,columnName,value);
     }
 
     @Override
-    public List<Element> listElements(String className, Long page) {
+    public List<T> listElements(String className, Long page) {
         return elementDao.listElements(className,page);
     }
 }

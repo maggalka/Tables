@@ -3,7 +3,8 @@ package uz.marina.tables.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uz.marina.tables.dao.ElementWithIdDao;
-import uz.marina.tables.model.Element;
+import uz.marina.tables.model.ElementWithId;
+
 
 /**
  * Created by Marina on 16.08.2017.
@@ -11,7 +12,7 @@ import uz.marina.tables.model.Element;
 
 @Service
 @Transactional(readOnly = true)
-public class ElementWithIdServiceImpl implements ElementWithIdService{
+public class ElementWithIdServiceImpl extends ElementServiceImpl implements ElementWithIdService{
 
     private ElementWithIdDao elementWithIdDao;
 
@@ -20,13 +21,14 @@ public class ElementWithIdServiceImpl implements ElementWithIdService{
     }
 
     @Override
-    public Element getElementById(Class<? extends Element> elementClass, int id) {
-        return elementWithIdDao.getElementById(elementClass,id);
+    public ElementWithId getElementById(String className, int id) {
+        return elementWithIdDao.getElementById(className,id);
     }
 
     @Transactional
     @Override
-    public void removeElementById(Class<? extends Element> elementClass, int id) {
-        elementWithIdDao.removeElementById(elementClass,id);
+    public void removeElementById(String className, int id) {
+        elementWithIdDao.removeElementById(className,id);
     }
+
 }
