@@ -6,17 +6,20 @@
 <body>
 
 <h1>Welcome to new Tables Project!</h1>
-<div>
-  Choose one of the pages:
-</div>
 <br/>
+<br/>
+<div>
+    <h3>
+        Choose one of the pages:
+    </h3>
+</div>
 <br/>
 
 <h3>
 
-<a href="adminMain.jsp" target="_blank">Admin main page</a>
+<a href="adminMain" target="_self">Admin main page</a>
 <br/>
-<a href="/userMain" target="_blank">User main page</a>
+<a href="userMain" target="_self">User main page</a>
 
 </h3>
 
