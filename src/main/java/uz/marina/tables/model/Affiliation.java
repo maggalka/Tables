@@ -1,6 +1,7 @@
 package uz.marina.tables.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Marina on 14.08.2017.
@@ -8,11 +9,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "affiliation")
-public class Affiliation implements Element{
+public class Affiliation implements Serializable, Element{
 
+    @Id
     @Column(name = "type")
     private int type;
 
+    @Id
     @Column(name = "attribute")
     private int attribute;
 

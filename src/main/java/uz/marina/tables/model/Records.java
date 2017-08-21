@@ -1,6 +1,7 @@
 package uz.marina.tables.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Marina on 14.08.2017.
@@ -8,11 +9,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "records")
-public class Records implements Element {
+public class Records implements Serializable, Element {
 
+    @Id
     @Column(name = "object")
     private int object;
 
+    @Id
     @Column(name = "attribute")
     private int attribute;
 
