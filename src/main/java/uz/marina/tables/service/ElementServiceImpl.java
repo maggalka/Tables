@@ -13,11 +13,11 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-public class ElementServiceImpl<T extends Element> implements ElementService {
+public class ElementServiceImpl<T extends Element> implements ElementService<T> {
 
-    private ElementDao elementDao;
+    private ElementDao<T> elementDao;
 
-    public void setElementDao(ElementDao elementDao) {
+    public void setElementDao(ElementDao<T> elementDao) {
         this.elementDao = elementDao;
     }
 

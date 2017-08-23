@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.jboss.logging.Logger;
 import org.springframework.stereotype.Repository;
+import uz.marina.tables.model.Element;
 import uz.marina.tables.model.ElementWithId;
 
 /**
@@ -12,7 +13,7 @@ import uz.marina.tables.model.ElementWithId;
  */
 
 @Repository
-public class ElementWithIdDaoImpl extends ElementDaoImpl implements ElementWithIdDao {
+public class ElementWithIdDaoImpl<T extends Element> extends ElementDaoImpl<T> implements ElementWithIdDao<T> {
     private static final Logger logger = LoggerFactory.logger(ElementDaoImpl.class);
 
     @Override

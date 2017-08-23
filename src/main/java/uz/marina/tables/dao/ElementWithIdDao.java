@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Marina on 15.08.2017.
  */
-public interface ElementWithIdDao extends ElementDao  {
+public interface ElementWithIdDao<T extends Element> extends ElementDao<T>  {
     ElementWithId getElementById(String className, int id);
     void removeElementById(String className, int id);
 }

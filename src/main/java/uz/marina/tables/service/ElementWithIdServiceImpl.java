@@ -3,6 +3,7 @@ package uz.marina.tables.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uz.marina.tables.dao.ElementWithIdDao;
+import uz.marina.tables.model.Element;
 import uz.marina.tables.model.ElementWithId;
 
 
@@ -12,11 +13,11 @@ import uz.marina.tables.model.ElementWithId;
 
 @Service
 @Transactional(readOnly = true)
-public class ElementWithIdServiceImpl extends ElementServiceImpl implements ElementWithIdService{
+public class ElementWithIdServiceImpl<T extends Element> extends ElementServiceImpl<T> implements ElementWithIdService<T>{
 
-    private ElementWithIdDao elementWithIdDao;
+    private ElementWithIdDao<T> elementWithIdDao;
 
-    public void setElementWithIdDao(ElementWithIdDao elementWithIdDao) {
+    public void setElementWithIdDao(ElementWithIdDao<T> elementWithIdDao) {
         this.elementWithIdDao = elementWithIdDao;
     }
 

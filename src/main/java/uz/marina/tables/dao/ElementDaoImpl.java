@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 @Repository
-public class ElementDaoImpl<T extends Element> implements ElementDao {
+public class ElementDaoImpl<T extends Element> implements ElementDao<T> {
     private static final Logger logger = LoggerFactory.logger(ElementDaoImpl.class);
 
     protected SessionFactory sessionFactory;
