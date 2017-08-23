@@ -16,11 +16,11 @@ import java.util.List;
 @Controller
 public class OtypesController {
 
+    private ElementWithIdService<Otypes> service;
+
     @Autowired
     @Qualifier(value = "elementWithIdService")
-    private ElementWithIdService service;
-
-    public void setService(ElementWithIdService service) {
+    public void setService(ElementWithIdService<Otypes> service) {
         this.service = service;
     }
 
@@ -33,7 +33,7 @@ public class OtypesController {
         List<Otypes> otypesList = this.service.listElements("Otypes",page);
         model.addAttribute("listOtypes", otypesList);
         model.addAttribute("page",page);
-        return "Otypes/otypes";
+        return "otypes";
     }
 
     @RequestMapping("otype/{id}")

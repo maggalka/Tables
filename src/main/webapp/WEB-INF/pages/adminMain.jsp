@@ -13,10 +13,10 @@
     </h4>
 </div>
 
-<a href="otypes.jsp" target="_blank">Edit object types.</a><br/>
-<a href="objects.jsp" target="_blank">Edit objects.</a><br/>
-<a href="attributes.jsp" target="_blank">Edit attributes.</a><br/>
-<a href="affiliations.jsp" target="_blank">Edit affiliations.</a><br/>
+<a href="otypes" target="_blank">Edit object types.</a><br/>
+<a href="objects" target="_blank">Edit objects.</a><br/>
+<a href="attributes" target="_blank">Edit attributes.</a><br/>
+<a href="affiliations" target="_blank">Edit affiliations.</a><br/>
 
 <br/>
 <br/>

@@ -8,10 +8,20 @@
 
 <context:component-scan base-package="uz.marina.tables"/>
 
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <!-- View Resolvers -->
+    <!-- Question: cannot map internal folders. Why? -->
+
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <bean id="viewResolver2" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/Otypes/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
 
     <!-- Database Information -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
